@@ -89,5 +89,5 @@ references basic_titles (tconst) on delete cascade;
 SELECT * FROM basic_titless
 INTO OUTFILE 'my_table.csv'
 CHARACTER SET euckr
-FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"'
+FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY ''
 LINES TERMINATED BY '\n'

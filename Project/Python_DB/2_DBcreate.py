@@ -7,8 +7,6 @@ total_start = time.time()
 total_start_time = time.strftime("[%y%m%d] %X", time.localtime())
 
 
-
-
 # Local DB
 # connect = pymysql.connect(host='localhost',
 #                           user='root', password='han1280', db='takealook', charset='utf8', local_infile=1)
@@ -45,7 +43,6 @@ basic_titles = ["USE takealook;",
                     engine = innoDB default
                     charset = utf8;
                """]
-
 # ↑ isAdult VARCHAR(50) NULL DEFAULT NULL, [DROP 必]
 #    endYear VARCHAR(50) NULL DEFAULT NULL,
 #    runtimeMinutes VARCHAR(50) NULL DEFAULT NULL,
@@ -92,25 +89,6 @@ principals = ["USE takealook;",
                     charset = utf8;
               """]
 
-# title_akas = ["USE takealook;",
-#               """
-#                   CREATE TABLE title_akas (
-#                       titleId VARCHAR(10) NOT NULL,
-#                       ordering VARCHAR(3) NOT NULL,
-#                       title VARCHAR(1024) NULL,
-#                       region VARCHAR(10) NULL,
-#                       language VARCHAR(10) NULL,
-#                       types VARCHAR(20) NULL,
-#                       attributes VARCHAR(256) NULL,
-#                       isOriginalTitle TINYINT(1) NULL,
-#                       PRIMARY KEY (titleId, ordering),
-#                       CONSTRAINT fk_titles_title_akas FOREIGN KEY (titleId) REFERENCES basic_titles(tconst) ON UPDATE CASCADE ON DELETE CASCADE
-#                   )
-#                   engine = innoDB default
-#                   charset = utf8;
-#               """]
-# ↑ types VARCHAR(20) NULL DEFAULT NULL, [DROP 必]
-#    attributes VARCHAR(256) NULL DEFAULT NULL
 basic_names = ["USE takealook;",
                """
                     CREATE TABLE basic_names (
@@ -129,29 +107,13 @@ basic_names = ["USE takealook;",
 # ↑ primaryProfession TEXT NULL, [DROP 必]
 #    knownForTitles TEXT NULL
 
-emotion_box = ["USE takealook;",
-               """
-                    CREATE TABLE emotion_box (
-                        emotion_name VARCHAR(20) NOT NULL,
-                        emotion_score TINYINT(1) NULL,
-                        PRIMARY KEY (emotion_name)
-                    )
-                    engine = innoDB default
-                    charset = utf8;
-               """]
-
 emotion = ["USE takealook;",
                """
                     CREATE TABLE emotion (
                         tconst VARCHAR(10) NOT NULL,
-                        ordering TINYINT(1) NOT NULL,
-                        emotion_name VARCHAR(20) NOT NULL,
-                        emotion_score TINYINT(1) NULL,
-                        relmovie_positive VARCHAR(10) NULL,
-                        positive_rank TINYINT(1) NULL,
-                        relmovie_negative VARCHAR(10) NULL,
-                        negative_rank TINYINT(1) NULL,
-                        PRIMARY KEY (tconst, ordering),
+                        emotion_name VARCHAR(80) NOT NULL,
+                        emotion_score VARCHAR(80) NULL,
+                        PRIMARY KEY (tconst),
                         CONSTRAINT fk_title_emotion FOREIGN KEY (tconst) REFERENCES basic_titles(tconst) ON UPDATE CASCADE ON DELETE CASCADE,
                         CONSTRAINT fk_box_emotion FOREIGN KEY (emotion_name) REFERENCES emotion_box(emotion_name) ON UPDATE CASCADE ON DELETE CASCADE
                     )
@@ -188,15 +150,14 @@ appraisal = ["USE takealook;",
                     charset = utf8;
                """]
 
-SQL_TABLE = [reset, basic_titles, crew, ratings, principals, basic_names, emotion_box, emotion, userinfo, appraisal]
-# SQL_TABLE = [reset, basic_titles, crew, ratings, principals, title_akas, basic_names, emotion_box, emotion, userinfo, appraisal]
+SQL_TABLE = [reset, basic_titles, crew, ratings, principals, basic_names, emotion, userinfo, appraisal]
 
 
 
 
 print("초기화 및 테이블 생성중")
 
-for i in range(0, 10):
+for i in range(9):
     sql = SQL_TABLE[i]
     print("# [" + str(i+1) + "] TABLE 생성완료")
     for s in sql:

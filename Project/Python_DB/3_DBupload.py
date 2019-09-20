@@ -38,11 +38,11 @@ today_dir = get_today()
 user_name = socket.gethostname() # 컴퓨터 user 이름
 dataset_path = "C:/Users/" + user_name + "/Desktop/Dataset/"
 
-# datasetTSV = ["basic_titles.tsv", "crew.tsv", "ratings.tsv",
-#                "principals.tsv", "title_akas.tsv", "basic_names.tsv"]
-
 datasetTSV = ["basic_titles.tsv", "crew.tsv", "ratings.tsv",
                "basic_names.tsv", "principals.tsv"]
+
+# test
+# emotion = "emotion.tsv"
 
 # 리스트 초기화
 DataSet = [0]*5
@@ -56,7 +56,7 @@ print("\nBlock 1 start")
 start_time = time.time()
 print(time.strftime("[%y-%m-%d] %X", time.localtime())) # 현재시간 출력
 
-for i in range(0, 5):
+for i in range(5):
     input_time_start = time.time()
     ds = datasetTSV[i]
     print("\n# [" + str(i+1), ds + "] Load")
@@ -86,6 +86,7 @@ for i in range(0, 5):
     print("[" + datasetName[i] + "] 소요시간 : %s초" \
           %(round(input_time - input_time_start, 1)))
 
+
 # Block 1 end
 print("\nBlock 1 end")
 end_time = time.time()
@@ -99,12 +100,9 @@ print("\n")
 Dtable = ["basic_titles", "basic_titles", "basic_titles", "basic_names", "basic_names"]
 Dcolumn = ["isAdult", "endYear", "runtimeMinutes", "primaryProfession", "knownForTitles"]
 
-# Dtable = ["title_akas", "title_akas", "basic_titles", "basic_titles", "basic_titles", "basic_names", "basic_names"]
-# Dcolumn = ["types", "attributes", "isAdult", "endYear", "runtimeMinutes", "primaryProfession", "knownForTitles"]
-
-# Table drop Column (7개)
+# Table drop Column (5개)
 print("\nㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ")
-for i in range(0, 5):
+for i in range(5):
     drop_time_start = time.time()
     # sql
     DropColumn = """
@@ -118,6 +116,7 @@ for i in range(0, 5):
     sql = DropResult[i]
     cursor.execute(sql)
     connect.commit()
+
     print("ㅡㅡㅡ #Commit ㅡㅡㅡ\n")
     # drop time
     drop_time = time.time()

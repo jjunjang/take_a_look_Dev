@@ -1,17 +1,11 @@
 # -*- coding: utf-8 -*-
-from plistlib import Data
 
 import pymysql
-import socket
 import time
-
-
 
 # 스크립트 시작
 total_start = time.time()
 total_start_time = time.strftime("[%y%m%d] %X", time.localtime())
-
-
 
 
 
@@ -94,9 +88,14 @@ SQL_S9 = """
             WHERE nconst not in (SELECT nconst FROM basic_titles);
         """
 
-SQL_Sentence = [SQL_S1, SQL_S2, SQL_S3, SQL_S4, SQL_S5, SQL_S6, SQL_S7, SQL_S8, SQL_S9]
+SQL_S10 = """
+            DELETE FROM basic_names
+            WHERE nconst not in (SELECT nconst FROM principals);
+        """
 
-for i in range(0, 7):
+SQL_Sentence = [SQL_S1, SQL_S2, SQL_S3, SQL_S4, SQL_S5, SQL_S6, SQL_S7, SQL_S8, SQL_S9, SQL_S10]
+
+for i in range(10):
     sql_time_start = time.time()
     sql = SQL_Sentence[i]
     print("\n[" + str(i+1) + "번 sql Load]" + sql)

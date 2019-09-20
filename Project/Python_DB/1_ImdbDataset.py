@@ -55,17 +55,17 @@ today_dir = get_today()
 
 # DB에 테이블을 만들 dataset list
 dataset = ["title.basics.tsv.gz", "name.basics.tsv.gz", "title.crew.tsv.gz",
-           "title.principals.tsv.gz", "title.ratings.tsv.gz", "title.akas.tsv.gz"]
+           "title.principals.tsv.gz", "title.ratings.tsv.gz"]
 
 datasetzip = ["basic_titles.zip", "basic_names.zip", "crew.zip",
-               "principals.zip", "ratings.zip", "title_akas.zip"]
+               "principals.zip", "ratings.zip"]
 
 datasettsv = ["basic_titles.tsv", "basic_names.tsv", "crew.tsv",
-               "principals.tsv", "ratings.tsv", "title_akas.tsv"]
+               "principals.tsv", "ratings.tsv"]
 
 # Dataset 다운로드
 if __name__ == '__main__':
-    for i in range(6):
+    for i in range(5):
         url = download_url + dataset[i] # 다운받기
         download(url,datasetzip[i])
         print(str(i+1), datasetzip[i] + "을 생성했습니다.")

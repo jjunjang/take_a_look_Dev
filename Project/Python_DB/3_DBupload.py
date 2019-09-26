@@ -1,17 +1,13 @@
 # -*- coding: utf-8 -*-
-from plistlib import Data
-
 import pymysql
 import socket
 import time
-
+import os
+import sys
 
 # 스크립트 시작
 total_start = time.time()
 total_start_time = time.strftime("[%y-%m-%d] %X", time.localtime())
-
-
-
 
 
 # Local DB
@@ -33,16 +29,16 @@ def get_today():
     return today_
 
 # 날짜 함수 -> 변수 대입
-today_dir = get_today()
+print("\n# Dataset폴더 이름형식 Ex) 2019-09-27")
+print("# 오늘 날짜로 입력하려면 'y'를 입력하세요.\n")
+D_input = str(input("# Dataset을 읽을날짜를 입력해주세요. : "))
 
-user_name = socket.gethostname() # 컴퓨터 user 이름
+# 컴퓨터 user 이름
+user_name = socket.gethostname()
 dataset_path = "C:/Users/" + user_name + "/Desktop/Dataset/"
 
 datasetTSV = ["basic_titles.tsv", "crew.tsv", "ratings.tsv",
                "basic_names.tsv", "principals.tsv"]
-
-# test
-# emotion = "emotion.tsv"
 
 # 리스트 초기화
 DataSet = [0]*5
@@ -50,51 +46,60 @@ datasetName = [0]*5
 datasetLoad = [0]*5
 DropResult = [0]*6
 
+def CheckFolder(D_input):
+    if (D_input == "y"):
+        today_dir = get_today()
+    else:
+        today_dir = D_input
+        if not os.path.isdir(dataset_path + today_dir):
+            print ("입력한 날짜폴더가 없습니다.")
+    return today_dir
 
-# Block 1 start
-print("\nBlock 1 start")
-start_time = time.time()
-print(time.strftime("[%y-%m-%d] %X", time.localtime())) # 현재시간 출력
-
-for i in range(5):
-    input_time_start = time.time()
-    ds = datasetTSV[i]
-    print("\n# [" + str(i+1), ds + "] Load")
-    datasetName[i] = ds[:-4]
-    # sql
-    datasetLoad = """
-            LOAD DATA LOCAL INFILE     '""" + dataset_path + today_dir + datasetTSV[i] + """'
-            INTO TABLE                 """ + datasetName[i] + """
-            CHARACTER SET 			   utf8
-            COLUMNS TERMINATED BY      '\t'
-            LINES TERMINATED BY        '\n'
-            IGNORE                     1 LINES;
-        """
-    DataSet[i] = str(datasetLoad)
-
-
-    # Dataset Upload
-    print("\n# [" + datasetName[i] + "] input start")
-    sql = DataSet[i]
-    cursor.execute(sql)
-    connect.commit()
-    print(sql)
-    print("ㅡㅡㅡ #Commit ㅡㅡㅡ\n")
-    # input time
-    input_time = time.time()
+def DatasetUpload():
+    # Block 1 start
+    print("\nBlock 1 start")
+    start_time = time.time()
     print(time.strftime("[%y-%m-%d] %X", time.localtime()))  # 현재시간 출력
-    print("[" + datasetName[i] + "] 소요시간 : %s초" \
-          %(round(input_time - input_time_start, 1)))
+
+    for i in range(5):
+        input_time_start = time.time()
+        ds = datasetTSV[i]
+        print("\n# [" + str(i+1), ds + "] Load")
+        datasetName[i] = ds[:-4]
+        # sql
+        datasetLoad = """
+                LOAD DATA LOCAL INFILE     '""" + dataset_path + CheckFolder(D_input) + "/" + datasetTSV[i] + """'
+                INTO TABLE                 """ + datasetName[i] + """
+                CHARACTER SET 			   utf8
+                COLUMNS TERMINATED BY      '\t'
+                LINES TERMINATED BY        '\n'
+                IGNORE                     1 LINES;
+            """
+        DataSet[i] = str(datasetLoad)
 
 
-# Block 1 end
-print("\nBlock 1 end")
-end_time = time.time()
-print(time.strftime("[%y-%m-%d] %X", time.localtime())) # 현재시간 출력
+        # Dataset Upload
+        print("\n# [" + datasetName[i] + "] input start")
+        sql = DataSet[i]
+        cursor.execute(sql)
+        connect.commit()
+        print(sql)
+        print("ㅡㅡㅡ #Commit ㅡㅡㅡ\n")
+        # input time
+        input_time = time.time()
+        print(time.strftime("[%y-%m-%d] %X", time.localtime()))  # 현재시간 출력
+        print("[" + datasetName[i] + "] 소요시간 : %s초" \
+              %(round(input_time - input_time_start, 1)))
 
-# 소요시간
-print("소요시간 : %s초" %round(end_time - start_time, 1))
-print("\n")
+
+    # Block 1 end
+    print("\nBlock 1 end")
+    end_time = time.time()
+    print(time.strftime("[%y-%m-%d] %X", time.localtime())) # 현재시간 출력
+
+    # 소요시간
+    print("소요시간 : %s초" %round(end_time - start_time, 1))
+    print("\n")
 
 
 Dtable = ["basic_titles", "basic_titles", "basic_titles", "basic_names", "basic_names"]
@@ -102,28 +107,33 @@ Dcolumn = ["isAdult", "endYear", "runtimeMinutes", "primaryProfession", "knownFo
 
 # Table drop Column (5개)
 print("\nㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ")
-for i in range(5):
-    drop_time_start = time.time()
-    # sql
-    DropColumn = """
-            ALTER TABLE """ + Dtable[i] + """
-            DROP COLUMN """ + Dcolumn[i] + """
-        """
-    DropResult[i] = str(DropColumn)
 
-    # Drop the table row
-    print("# " + str(i+1) + " [" + Dtable[i] + "] ALTER table, [" + Dcolumn[i] + "] DROP column start")
-    sql = DropResult[i]
-    cursor.execute(sql)
-    connect.commit()
+def DropTable():
+    for i in range(5):
+        drop_time_start = time.time()
+        # sql
+        DropColumn = """
+                ALTER TABLE """ + Dtable[i] + """
+                DROP COLUMN """ + Dcolumn[i] + """
+            """
+        DropResult[i] = str(DropColumn)
 
-    print("ㅡㅡㅡ #Commit ㅡㅡㅡ\n")
-    # drop time
-    drop_time = time.time()
-    print(time.strftime("[%y-%m-%d] %X", time.localtime()))  # 현재시간 출력
-    print("[" + Dtable[i] + " Table " + Dcolumn[i] + " column " + "] 소요시간 : %s초" \
-          %(round(drop_time - drop_time_start, 1)))
+        # Drop the table row
+        print("# " + str(i+1) + " [" + Dtable[i] + "] ALTER table, [" + Dcolumn[i] + "] DROP column start")
+        sql = DropResult[i]
+        cursor.execute(sql)
+        connect.commit()
 
+        print("ㅡㅡㅡ #Commit ㅡㅡㅡ\n")
+        # drop time
+        drop_time = time.time()
+        print(time.strftime("[%y-%m-%d] %X", time.localtime()))  # 현재시간 출력
+        print("[" + Dtable[i] + " Table " + Dcolumn[i] + " column " + "] 소요시간 : %s초" \
+              %(round(drop_time - drop_time_start, 1)))
+        print("\n\n")
+
+DatasetUpload()
+DropTable()
 
 # processing end
 total_end = time.time()

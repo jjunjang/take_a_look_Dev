@@ -1,6 +1,6 @@
+# -*- coding: utf-8 -*-
 import pymysql
 import time
-
 
 # 스크립트 시작
 total_start = time.time()
@@ -8,11 +8,11 @@ total_start_time = time.strftime("[%y%m%d] %X", time.localtime())
 
 
 # Local DB
-# connect = pymysql.connect(host='localhost',
-#                           user='root', password='han1280', db='takealook', charset='utf8', local_infile=1)
+connect = pymysql.connect(host='localhost',
+                          user='root', password='han1280', db='takealook', charset='utf8', local_infile=1)
 # RDS SERVER DB
-connect = pymysql.connect(host='takealook.cjdwnzzk2agh.ap-northeast-2.rds.amazonaws.com',
-                          user='tal_admin', password='take1234', db='takealook', charset='utf8', local_infile=1)
+# connect = pymysql.connect(host='takealook.cjdwnzzk2agh.ap-northeast-2.rds.amazonaws.com',
+#                           user='tal_admin', password='take1234', db='takealook', charset='utf8', local_infile=1)
 
 cursor = connect.cursor(pymysql.cursors.DictCursor)
 
@@ -77,7 +77,7 @@ principals = ["USE takealook;",
               """
                     CREATE TABLE principals (
                         tconst VARCHAR(10) NOT NULL,
-                        ordering VARCHAR(3) NOT NULL,
+                        ordering TINYINT(1) NOT NULL,
                         nconst VARCHAR(10) NOT NULL,
                         category VARCHAR(30) NULL,
                         job VARCHAR(900) NULL,
@@ -103,7 +103,7 @@ basic_names = ["USE takealook;",
                     engine = innoDB default
                     charset = utf8;
                """]
-# CONSTRAINT fk_principals_names FOREIGN KEY (nconst) REFERENCES principals(tconst) ON UPDATE CASCADE ON DELETE CASCADE
+# CONSTRAINT fk_principals_names FOREIGN KEY (nconst) REFERENCES principals(nconst) ON UPDATE CASCADE ON DELETE CASCADE
 # ↑ primaryProfession TEXT NULL, [DROP 必]
 #    knownForTitles TEXT NULL
 
@@ -114,8 +114,7 @@ emotion = ["USE takealook;",
                         emotion_name VARCHAR(80) NOT NULL,
                         emotion_score VARCHAR(80) NULL,
                         PRIMARY KEY (tconst),
-                        CONSTRAINT fk_title_emotion FOREIGN KEY (tconst) REFERENCES basic_titles(tconst) ON UPDATE CASCADE ON DELETE CASCADE,
-                        CONSTRAINT fk_box_emotion FOREIGN KEY (emotion_name) REFERENCES emotion_box(emotion_name) ON UPDATE CASCADE ON DELETE CASCADE
+                        CONSTRAINT fk_title_emotion FOREIGN KEY (tconst) REFERENCES basic_titles(tconst) ON UPDATE CASCADE ON DELETE CASCADE
                     )
                     engine = innoDB default
                     charset = utf8;
@@ -177,4 +176,3 @@ print("%s ~ %s, 소요시간 : %s초" \
 # SQL SERVER disconnect
 connect.close()
 print("# Finish")
-

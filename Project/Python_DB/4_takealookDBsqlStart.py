@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 import pymysql
 import time
 
@@ -10,11 +9,11 @@ total_start_time = time.strftime("[%y%m%d] %X", time.localtime())
 
 
 # Local DB
-connect = pymysql.connect(host='localhost',
-                          user='root', password='han1280', db='takealook', charset='utf8', local_infile=1)
+# connect = pymysql.connect(host='localhost',
+#                           user='root', password='han1280', db='takealook', charset='utf8', local_infile=1)
 # RDS SERVER DB
-# connect = pymysql.connect(host='takealook.cjdwnzzk2agh.ap-northeast-2.rds.amazonaws.com',
-#                           user='tal_admin', password='take1234', db='takealook', charset='utf8', local_infile=1)
+connect = pymysql.connect(host='takealook.cjdwnzzk2agh.ap-northeast-2.rds.amazonaws.com',
+                          user='tal_admin', password='take1234', db='takealook', charset='utf8', local_infile=1)
 
 cursor = connect.cursor(pymysql.cursors.DictCursor)
 
@@ -80,22 +79,12 @@ SQL_S7 = """
 
 SQL_S8 = """
             DELETE FROM basic_names
-            WHERE nconst not in (SELECT nconst FROM principals);
+            WHERE nconst NOT IN (SELECT nconst FROM principals);
         """
 
-SQL_S9 = """
-            DELETE FROM principals
-            WHERE nconst not in (SELECT nconst FROM basic_titles);
-        """
+SQL_Sentence = [SQL_S1, SQL_S2, SQL_S3, SQL_S4, SQL_S5, SQL_S6, SQL_S7, SQL_S8]
 
-SQL_S10 = """
-            DELETE FROM basic_names
-            WHERE nconst not in (SELECT nconst FROM principals);
-        """
-
-SQL_Sentence = [SQL_S1, SQL_S2, SQL_S3, SQL_S4, SQL_S5, SQL_S6, SQL_S7, SQL_S8, SQL_S9, SQL_S10]
-
-for i in range(10):
+for i in range(7):
     sql_time_start = time.time()
     sql = SQL_Sentence[i]
     print("\n[" + str(i+1) + "번 sql Load]" + sql)
@@ -103,7 +92,7 @@ for i in range(10):
     cursor.execute(sql)
     result = cursor.fetchall()
     connect.commit()
-    print("[" + str(i+1) + "번 sql ]ㅡㅡㅡ #Commit ㅡㅡㅡ")
+    print("[ " + str(i+1) + "번 sql ]ㅡㅡㅡ #Commit ㅡㅡㅡ")
     sql_time = time.time()
     print(time.strftime("[%y-%m-%d] %X", time.localtime()))  # 현재시간 출력
     print(" 소요시간 : %s초\n" \

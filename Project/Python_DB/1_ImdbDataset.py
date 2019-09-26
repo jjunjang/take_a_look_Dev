@@ -1,12 +1,14 @@
+# -*- coding: utf-8 -*-
+from multiprocessing import Pool # Pool import하기
+from requests import get  # to make GET request
 import socket
 import shutil
 import os
 import time
 import zipfile
-import sys
-import msvcrt as m
 
-from requests import get  # to make GET request
+
+start_time = time.time()
 
 # url 다운로드 함수
 def download(url, file_name):
@@ -73,13 +75,17 @@ if __name__ == '__main__':
 
 # 오늘 날짜로 폴더 생성
 dataset_daypath = dataset_path + today_dir + "\\"
-print(createFile(dataset_path))
-print(createFile(dataset_daypath))
+print(createFile(dataset_path) + "\n" + createFile(dataset_daypath))
 
 # 프로젝트 폴더에 다운받은 알집을 Dataset폴더로 옮김
-for i in range(6):
+for i in range(5):
     shutil.move(project_path + datasetzip[i], dataset_daypath + datasetzip[i])
     print(datasetzip[i] + " 파일을", dataset_path + " 폴더로 옮겼습니다.", i)
+
+
+pool = Pool(processes=5) # 6개의 프로세스를 사용합니다.
+pool.map(__name__) # 실행문/함수 입력
+print("--- Multiprocessing %s seconds ---" % (round(time.time() - start_time, 2)) )
 
 # print("재 압축을 완료했으면 q를 입력해주세요..")
 # while True:
@@ -89,7 +95,7 @@ for i in range(6):
 #     else:
 #        print ("'q' 를 입력해주세요.")
 #
-# for i in range(6):
+# for i in range(5):
 #     unzip(dataset_path + today_dir + datasetzip[i],
 #           dataset_path + today_dir)
 #     print(today_dir, str(i + 1), datasetzip[i] + " 압축 해제")

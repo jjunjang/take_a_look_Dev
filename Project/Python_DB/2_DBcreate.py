@@ -111,8 +111,9 @@ emotion = ["USE takealook;",
                """
                     CREATE TABLE emotion (
                         tconst VARCHAR(10) NOT NULL,
-                        emotion_name VARCHAR(80) NOT NULL,
-                        emotion_score VARCHAR(80) NULL,
+                        emotionTags VARCHAR(80) NOT NULL,
+                        emotioonName VARCHAR(80) NULL,
+                        emotionScore VARCHAR(80) NULL,
                         PRIMARY KEY (tconst),
                         CONSTRAINT fk_title_emotion FOREIGN KEY (tconst) REFERENCES basic_titles(tconst) ON UPDATE CASCADE ON DELETE CASCADE
                     )

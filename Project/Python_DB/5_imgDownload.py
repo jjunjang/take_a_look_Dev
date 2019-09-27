@@ -29,7 +29,7 @@ Loc = "C:\\Users\\" + user_name + "\\Desktop\\img\\"
 
 # 네이버 검색 Open API 사용 요청시 얻게되는 정보를 입력합니다
 naver_client_id = "i2FXVweBP9KWlucnK6g5"
-naver_client_secret = "rvzS0ngsDd"
+naver_client_secret = ""
 
 def cleanhtml(raw_html):
     cleanr = re.compile('<.*?>')

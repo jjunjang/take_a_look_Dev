@@ -10,7 +10,8 @@ start_time = time.time()
 print(time.strftime("[%y-%m-%d] %X", time.localtime())) # 현재시간 출력
 
 ACCESS_KEY = 'AKIAX2R4V25UHD5X4DPK'
-SECRET_KEY = '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'
+SECRET_KEY = ''
+
 # 업로드할 폴더 경로
 path_dir = "C:\\Users\\JJunJang\\Desktop\\img\\"
 

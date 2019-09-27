@@ -38,12 +38,12 @@ user_name = socket.gethostname()
 dataset_path = "C:/Users/" + user_name + "/Desktop/Dataset/"
 
 datasetTSV = ["basic_titles.tsv", "crew.tsv", "ratings.tsv",
-               "basic_names.tsv", "principals.tsv"]
+               "basic_names.tsv", "principals.tsv", "Horror.tsv"]
 
 # 리스트 초기화
-DataSet = [0]*5
-datasetName = [0]*5
-datasetLoad = [0]*5
+DataSet = [0]*6
+datasetName = [0]*6
+datasetLoad = [0]*6
 DropResult = [0]*6
 
 def CheckFolder(D_input):
@@ -61,7 +61,7 @@ def DatasetUpload():
     start_time = time.time()
     print(time.strftime("[%y-%m-%d] %X", time.localtime()))  # 현재시간 출력
 
-    for i in range(5):
+    for i in len(datasetTSV):
         input_time_start = time.time()
         ds = datasetTSV[i]
         print("\n# [" + str(i+1), ds + "] Load")
@@ -109,7 +109,7 @@ Dcolumn = ["isAdult", "endYear", "runtimeMinutes", "primaryProfession", "knownFo
 print("\nㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ")
 
 def DropTable():
-    for i in range(5):
+    for i in len(DropResult):
         drop_time_start = time.time()
         # sql
         DropColumn = """

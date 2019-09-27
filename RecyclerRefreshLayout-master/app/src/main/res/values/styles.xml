@@ -1,0 +1,11 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#F2DC93</item>
+        <item name="colorPrimaryDark">#F2DC93</item>
+            <!--        탭색깔지정-->
+    </style>
+
+</resources>

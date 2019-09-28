@@ -1,7 +1,5 @@
 package info.androidhive.materialtabs.fragments;
 
-
-
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -10,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-
+import android.widget.Toast;
 
 import info.androidhive.materialtabs.R;
 import info.androidhive.materialtabs.adapter.ListViewAdapter;
@@ -40,7 +38,9 @@ public class OneFragment extends ListFragment {
         String descStr = item.getDesc() ;
         Drawable iconDrawable = item.getIcon() ;
 
+
         // TODO : use item data.
+
     }
 
 
@@ -63,6 +63,26 @@ public class OneFragment extends ListFragment {
         // 세 번째 아이템 추가.
         adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.mimg3),
                 "힘을 내요, 미스터 리", "평점: 8.46") ;
+
+        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.mimg3),
+                "힘을 내요, 미스터 리", "평점: 8.46") ;
+
+        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.mimg3),
+                "힘을 내요, 미스터 리", "평점: 8.46") ;
+
+        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.mimg3),
+                "힘을 내요, 미스터 리", "평점: 8.46") ;
+
+        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.mimg3),
+                "힘을 내요, 미스터 리", "평점: 8.46") ;
+
+        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.mimg3),
+                "힘을 내요, 미스터 리", "평점: 8.46") ;
+
+        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.tt0188453),
+                "", "") ;
+
+
 
 
         return super.onCreateView(inflater, container, savedInstanceState);

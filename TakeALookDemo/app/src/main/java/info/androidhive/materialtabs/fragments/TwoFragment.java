@@ -86,6 +86,11 @@ public class TwoFragment extends ListFragment {
         adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_tab_contacts),
                 "영화제목", "영화 설명") ;
 
+        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.tt0188453),
+                "", "") ;
+
+
+
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 

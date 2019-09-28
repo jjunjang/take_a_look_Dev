@@ -36,6 +36,11 @@
             android:label="@string/title_activity_option_tabs"
             android:parentActivityName=".activity.MainActivity" >
         </activity>
+<!--        <activity android:name=".dialog.ButtonDialog"
+            android:label="button"
+            android:parentActivityName=".activity.MainActivity">
+        </activity>-->
+
     </application>
 
 </manifest>

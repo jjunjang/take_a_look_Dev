@@ -65,16 +65,6 @@
             android:textSize="15dp"
             android:textColor="#FFFFFF"/>
 
-<!--
-        <Button
-            android:id="@+id/btnCustomIconTabs"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/btn_custom_icon_tabs"
-            android:layout_marginTop="@dimen/btn_margin_top"
-            android:textSize="15dp" />
--->
-
     </LinearLayout>
 
 

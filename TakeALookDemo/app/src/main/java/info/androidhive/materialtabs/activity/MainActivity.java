@@ -39,12 +39,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btnSimpleTabs:
                 startActivity(new Intent(MainActivity.this, SimpleTabsActivity.class));
                 break;
+
             case R.id.btnRecommend:
                 startActivity(new Intent(MainActivity.this, RecommendActivity.class));
                 break;
+
             case R.id.btnRank:
                 startActivity(new Intent(MainActivity.this, RankActivity.class));
                 break;
+
             case R.id.btnOption:
                 startActivity(new Intent(MainActivity.this, OptionActivity.class));
                 break;

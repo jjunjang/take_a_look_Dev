@@ -55,29 +55,29 @@ public class OneFragment extends ListFragment {
         setListAdapter(adapter) ;
 
         // 첫 번째 아이템 추가.
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.mimg11),
-                "양자물리학", "평점: 9.01") ;
+        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.tt0804540),
+                "택시4", "평점: 5.6") ;
         // 두 번째 아이템 추가.
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.mimg2),
-                "예스터데이", "평점: 8.54") ;
+        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.tt0848228),
+                "어벤져스엔드게임", "평점: 8.5") ;
         // 세 번째 아이템 추가.
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.mimg3),
-                "힘을 내요, 미스터 리", "평점: 8.46") ;
+        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.tt1078912),
+                "박물관이살아있다2", "평점: 6.0") ;
 
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.mimg3),
-                "힘을 내요, 미스터 리", "평점: 8.46") ;
+        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.tt6146586),
+                "존윅3파라벨룸", "평점: 7.7") ;
 
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.mimg3),
-                "힘을 내요, 미스터 리", "평점: 8.46") ;
+        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.tt6911608),
+                "맘마미아2", "평점: 6.7") ;
 
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.mimg3),
-                "힘을 내요, 미스터 리", "평점: 8.46") ;
+        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.tt7160070),
+                "신과함께죄와벌", "평점: 7.3") ;
 
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.mimg3),
-                "힘을 내요, 미스터 리", "평점: 8.46") ;
+        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.tt0107290),
+                "쥬라기월드", "평점: 8.4") ;
 
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.mimg3),
-                "힘을 내요, 미스터 리", "평점: 8.46") ;
+        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.tt2446042),
+                "테이큰3", "평점: 6.0") ;
 
         adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.tt0188453),
                 "", "") ;

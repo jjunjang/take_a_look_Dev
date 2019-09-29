@@ -53,14 +53,14 @@ public class ThreeFragment extends ListFragment {
         setListAdapter(adapter) ;
 
         // 첫 번째 아이템 추가.
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_tab_contacts),
-                "영화제목", "영화 설명") ;
+        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.tt5463162),
+                "데드풀", "평점: 7.7") ;
         // 두 번째 아이템 추가.
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_tab_contacts),
-                "영화제목", "영화 설명") ;
+        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.tt0338309),
+                "말레피센트", "평점: 7.8") ;
         // 세 번째 아이템 추가.
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_tab_contacts),
-                "영화제목", "영화 설명") ;
+        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.tt1951265),
+                "헝거게임 모킹제이", "평점: 6.6") ;
 
         /*adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.tt0188453),
                 "", "") ;*/

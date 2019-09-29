@@ -52,39 +52,42 @@ public class TwoFragment extends ListFragment {
         adapter = new ListViewAdapter() ;
         setListAdapter(adapter) ;
 
-        // 첫 번째 아이템 추가.
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_tab_contacts),
-                "영화제목", "영화 설명") ;
-        // 두 번째 아이템 추가.
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_tab_contacts),
-                "영화제목", "영화 설명") ;
-        // 세 번째 아이템 추가.
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_tab_contacts),
-                "영화제목", "영화 설명") ;
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_tab_contacts),
-                "영화제목", "영화 설명") ;
-        // 두 번째 아이템 추가.
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_tab_contacts),
-                "영화제목", "영화 설명") ;
-        // 세 번째 아이템 추가.
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_tab_contacts),
-                "영화제목", "영화 설명") ;
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_tab_contacts),
-                "영화제목", "영화 설명") ;
-        // 두 번째 아이템 추가.
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_tab_contacts),
-                "영화제목", "영화 설명") ;
-        // 세 번째 아이템 추가.
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_tab_contacts),
-                "영화제목", "영화 설명") ;
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_tab_contacts),
-                "영화제목", "영화 설명") ;
-        // 두 번째 아이템 추가.
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_tab_contacts),
-                "영화제목", "영화 설명") ;
-        // 세 번째 아이템 추가.
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_tab_contacts),
-                "영화제목", "영화 설명") ;
+
+        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.tt0306047),
+                "무서운영화3", "평점 : 5.5") ;
+
+        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.tt6139732	),
+                "알라딘", "평점 : 7.5") ;
+
+        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.tt2097307),
+                "뺑빤", "평점 : 6.1") ;
+
+        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.tt0483607),
+                "둠스데이2018", "평점 : 6.5") ;
+
+        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.tt0482599),
+                "셔터", "평점 : 5.2") ;
+
+        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.tt2473682	),
+                "파라노말액티비티더마트드원스", "평점 : 5.0") ;
+
+        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.tt0462538),
+                "심슨가족, 더무비", "평점 : 7.3") ;
+
+        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.tt0107978),
+                "로보캅3", "평점 : 4.1") ;
+
+        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.tt2660888),
+                "스타트렉비욘드", "평점 : 7.1") ;
+
+        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.tt0901487),
+                "좋은놈,나쁜놈,이상한놈", "평점 : 7.3") ;
+
+        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.tt2510894),
+                "몬스터호텔", "평점 : 6.7") ;
+
+        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.tt0188453),
+                "버스데이걸", "평점 : 6.1") ;
 
         adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.tt0188453),
                 "", "") ;

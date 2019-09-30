@@ -41,7 +41,7 @@
             android:layout_height="300dp"
             android:layout_weight="1"
             android:scaleType="centerInside"
-            android:src="@drawable/tt2659414" />
+            android:src="@drawable/tt5463162" />
 
         <ImageView
             android:id="@+id/reimg2"
@@ -50,7 +50,7 @@
             android:layout_height="300dp"
             android:layout_weight="1"
             android:scaleType="centerInside"
-            android:src="@drawable/tt2659414"
+            android:src="@drawable/tt0421715"
             android:layout_toRightOf="@id/reimg1"/>
 
 
@@ -61,7 +61,7 @@
             android:layout_height="300dp"
             android:layout_weight="1"
             android:scaleType="centerInside"
-            android:src="@drawable/tt2659414"
+            android:src="@drawable/tt6911608"
             android:layout_below="@id/reimg1"/>
 
         <ImageView

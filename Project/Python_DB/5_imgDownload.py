@@ -15,17 +15,18 @@ total_start = time.time()
 total_start_time = time.strftime("[%y-%m-%d] %X", time.localtime())
 
 # Local DB
-connect = pymysql.connect(host='localhost',
-                          user='root', password='han1280', db='takealook', charset='utf8', local_infile=1)
+# connect = pymysql.connect(host='localhost',
+#                           user='root', password='han1280', db='takealook', charset='utf8', local_infile=1)
 # RDS SERVER DB
-# connect = pymysql.connect(host='takealook.cjdwnzzk2agh.ap-northeast-2.rds.amazonaws.com',
-#                           user='tal_admin', password='take1234', db='takealook', charset='utf8', local_infile=1)
+connect = pymysql.connect(host='takealook.cjdwnzzk2agh.ap-northeast-2.rds.amazonaws.com',
+                          user='tal_admin', password='take1234', db='takealook', charset='utf8', local_infile=1)
 
 cursor = connect.cursor(pymysql.cursors.DictCursor)
 
 # 컴퓨터 user 이름, 파일이 저장될 디렉토리
 user_name = socket.gethostname()
-Loc = "C:\\Users\\" + user_name + "\\Desktop\\img\\"
+Loc = "C:\\Users\\" + user_name + "\\Desktop\\Dataset\\img\\"
+LocSum = "C:\\Users\\" + user_name + "\\Desktop\\Dataset\\imgSum\\"
 
 # 네이버 검색 Open API 사용 요청시 얻게되는 정보를 입력합니다
 naver_client_id = "i2FXVweBP9KWlucnK6g5"
@@ -38,7 +39,7 @@ def cleanhtml(raw_html):
 
 
 def searchByTitle(title):
-    myurl = 'https://openapi.naver.com/v1/search/movie.json?display=1&query=' + quote(title)
+    myurl = 'https://openapi.naver.com/v1/search/movie.json?display=2&query=' + quote(title)
     request = urllib.request.Request(myurl)
     request.add_header("X-Naver-Client-Id", naver_client_id)
     request.add_header("X-Naver-Client-Secret", naver_client_secret)
@@ -54,6 +55,17 @@ def searchByTitle(title):
 
     else:
         print("Error Code:" + rescode)
+
+# 검색 결과가 없으면 액박이미지를 다운
+def getInfoFromNaver(searchTitle):
+    items = searchByTitle(searchTitle)
+
+    if (items != None):
+        findItemByInput(items)
+    else:
+        X = "https://ssl.pstatic.net/static/movie/2012/06/dft_img203x290.png"
+        urllib.request.urlretrieve(X, "%s%s.jpg" % (Loc, tconst))
+        print("["+ tconst + "] "+ searchTitle + "에 대한 검색결과가 없습니다.\n")
 
 def imgSrc(url):
     with urllib.request.urlopen(url) as response:
@@ -75,25 +87,17 @@ def get_soup(url):
     soup = BeautifulSoup(plain_text, 'lxml')
     return soup
 
-def getInfoFromNaver(searchTitle):
-    items = searchByTitle(searchTitle)
 
-    if (items != None):
-        findItemByInput(items)
-    else:
-        X = "https://ssl.pstatic.net/static/movie/2012/06/dft_img203x290.png"
-        urllib.request.urlretrieve(X, "%s%s.jpg" % (Loc, tconst))
-        print("["+ tconst + "] "+ searchTitle + "에 대한 검색결과가 없습니다.\n")
 
 def findItemByInput(items):
     for index, item in enumerate(items):
         navertitle = cleanhtml(item['title'])
         naversubtitle = cleanhtml(item['subtitle'])
         naverpubdate = cleanhtml(item['pubDate'])
-        # naverdirector = cleanhtml(item['director'])
-        # naveractor = cleanhtml(item['actor'])
+        naverdirector = cleanhtml(item['director'])
+        naveractor = cleanhtml(item['actor'])
         naverlink = cleanhtml(item['link'])
-        # naverimage = cleanhtml(item['image'])
+        naverimage = cleanhtml(item['image'])
 
         navertitle = navertitle.replace(" ", "")
         navertitle = navertitle.replace("-", ",")
@@ -117,14 +121,15 @@ def findItemByInput(items):
 
         if (primaryTitle == naversubtitle):
             # urllib.request.urlretrieve(imgSrc(naverBig), Loc + tconst + "_" + primaryName + ".jpg")
-            urllib.request.urlretrieve(imgSrc(naverBig), Loc + tconst + ".jpg")
-            print(imgSrc(naverBig)+"\n")
+            urllib.request.urlretrieve(imgSrc(naverBig), "%s%s.jpg" % (Loc, tconst))
+            # print(imgSrc(naverBig)+"\n")
         else:
-            X = "https://ssl.pstatic.net/static/movie/2012/06/dft_img203x290.png"
+            # X = "https://ssl.pstatic.net/static/movie/2012/06/dft_img203x290.png"
             # urllib.request.urlretrieve(X, "%s%s_%s.jpg"%(Loc, tconst, primaryName))
-            urllib.request.urlretrieve(X, "%s%s.jpg" % (Loc, tconst))
-            print(imgSrc(naverBig))
+            urllib.request.urlretrieve(imgSrc(naverBig), "%s%s.jpg" % (Loc, tconst))
             print("NULL\n")
+            # print(imgSrc(naverBig))
+
 
 if __name__ =='__main__':
     # sql실행
@@ -145,7 +150,7 @@ if __name__ =='__main__':
     connect.close()
 
 start_time = time.time()
-pool = Pool(processes=6) # 6개의 프로세스를 사용합니다.
+pool = Pool(processes=5)
 pool.map(__name__) # 실행문/함수 입력
 
 # processing end

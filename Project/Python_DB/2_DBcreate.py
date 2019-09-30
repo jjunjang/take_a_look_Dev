@@ -31,8 +31,8 @@ basic_titles = ["USE takealook;",
                     CREATE TABLE basic_titles (
                         tconst VARCHAR(10) NOT NULL,
                         titleType VARCHAR(20) NULL,
-                        primaryTitle VARCHAR(415) NULL,
                         originalTitle VARCHAR(415) NULL,
+                        titleKor VARCHAR(415) NULL,
                         isAdult VARCHAR(2) NULL,
                         startYear VARCHAR(10) NULL,
                         endYear VARCHAR(10) NULL,
@@ -43,9 +43,11 @@ basic_titles = ["USE takealook;",
                     engine = innoDB default
                     charset = utf8;
                """]
-# ↑ isAdult VARCHAR(50) NULL DEFAULT NULL, [DROP 必]
+# ↑ originalTitle VARCHAR(415) NULL,
+#    isAdult VARCHAR(50) NULL DEFAULT NULL, [DROP 必]
 #    endYear VARCHAR(50) NULL DEFAULT NULL,
 #    runtimeMinutes VARCHAR(50) NULL DEFAULT NULL,
+
 
 crew = ["USE takealook;",
         """
@@ -113,7 +115,7 @@ emotion = ["USE takealook;",
                         tconst VARCHAR(10) NOT NULL,
                         emotionTags VARCHAR(80) NOT NULL,
                         emotioonName VARCHAR(80) NULL,
-                        emotionScore VARCHAR(80) NULL,
+                        emotionScore VARCHAR(10) NULL,
                         PRIMARY KEY (tconst),
                         CONSTRAINT fk_title_emotion FOREIGN KEY (tconst) REFERENCES basic_titles(tconst) ON UPDATE CASCADE ON DELETE CASCADE
                     )
@@ -157,7 +159,7 @@ SQL_TABLE = [reset, basic_titles, crew, ratings, principals, basic_names, emotio
 
 print("초기화 및 테이블 생성중")
 
-for i in range(9):
+for i in range(len(SQL_TABLE)):
     sql = SQL_TABLE[i]
     print("# [" + str(i+1) + "] TABLE 생성완료")
     for s in sql:

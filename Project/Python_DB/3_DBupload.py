@@ -38,7 +38,7 @@ user_name = socket.gethostname()
 dataset_path = "C:/Users/" + user_name + "/Desktop/Dataset/"
 
 datasetTSV = ["basic_titles.tsv", "crew.tsv", "ratings.tsv",
-               "basic_names.tsv", "principals.tsv", "Horror.tsv"]
+               "basic_names.tsv", "principals.tsv", "emotion.tsv"]
 
 # 리스트 초기화
 DataSet = [0]*6
@@ -61,7 +61,7 @@ def DatasetUpload():
     start_time = time.time()
     print(time.strftime("[%y-%m-%d] %X", time.localtime()))  # 현재시간 출력
 
-    for i in len(datasetTSV):
+    for i in range(len(datasetTSV)):
         input_time_start = time.time()
         ds = datasetTSV[i]
         print("\n# [" + str(i+1), ds + "] Load")
@@ -72,7 +72,7 @@ def DatasetUpload():
                 INTO TABLE                 """ + datasetName[i] + """
                 CHARACTER SET 			   utf8
                 COLUMNS TERMINATED BY      '\t'
-                LINES TERMINATED BY        '\n'
+                LINES TERMINATED BY        '\r\n'
                 IGNORE                     1 LINES;
             """
         DataSet[i] = str(datasetLoad)
@@ -102,14 +102,14 @@ def DatasetUpload():
     print("\n")
 
 
-Dtable = ["basic_titles", "basic_titles", "basic_titles", "basic_names", "basic_names"]
-Dcolumn = ["isAdult", "endYear", "runtimeMinutes", "primaryProfession", "knownForTitles"]
+Dtable = ["basic_titles", "basic_titles", "basic_titles", "basic_titles", "basic_names", "basic_names"]
+Dcolumn = ["originalTitle", "isAdult", "endYear", "runtimeMinutes", "primaryProfession", "knownForTitles"]
 
-# Table drop Column (5개)
+# Table drop Column (6개)
 print("\nㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ")
 
 def DropTable():
-    for i in len(DropResult):
+    for i in range(len(DropResult)):
         drop_time_start = time.time()
         # sql
         DropColumn = """

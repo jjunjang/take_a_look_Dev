@@ -83,7 +83,7 @@ for i in range(5):
     print(datasetzip[i] + " 파일을", dataset_path + " 폴더로 옮겼습니다.", i)
 
 
-pool = Pool(processes=5) # 6개의 프로세스를 사용합니다.
+pool = Pool(processes=5)
 pool.map(__name__) # 실행문/함수 입력
 print("--- Multiprocessing %s seconds ---" % (round(time.time() - start_time, 2)) )
 

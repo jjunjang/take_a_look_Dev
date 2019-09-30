@@ -9,11 +9,11 @@ total_start_time = time.strftime("[%y%m%d] %X", time.localtime())
 
 
 # Local DB
-# connect = pymysql.connect(host='localhost',
-#                           user='root', password='han1280', db='takealook', charset='utf8', local_infile=1)
+connect = pymysql.connect(host='localhost',
+                          user='root', password='han1280', db='takealook', charset='utf8', local_infile=1)
 # RDS SERVER DB
-connect = pymysql.connect(host='takealook.cjdwnzzk2agh.ap-northeast-2.rds.amazonaws.com',
-                          user='tal_admin', password='take1234', db='takealook', charset='utf8', local_infile=1)
+# connect = pymysql.connect(host='takealook.cjdwnzzk2agh.ap-northeast-2.rds.amazonaws.com',
+#                           user='tal_admin', password='take1234', db='takealook', charset='utf8', local_infile=1)
 
 cursor = connect.cursor(pymysql.cursors.DictCursor)
 
@@ -33,63 +33,70 @@ today_dir = get_today()
 # SQL
 SQL_Use = "USE takealook;"
 
-SQL_optimize = """
-            optimize table basic_titles;
+SQL_S1 = """
+            ALTER TABLE basic_titles
+	        ADD COLUMN titleKor VARCHAR(415) NULL DEFAULT NULL AFTER primaryTitle;
         """
 
-SQL_S1 = """
+SQL_S2 = """
             DELETE FROM basic_titles
             WHERE titleType != 'movie';
         """
 
-SQL_S2 = """
+SQL_S3 = """
             DELETE FROM basic_titles 
             WHERE startYear not between 1980 and 2020 and primaryTitle <> 'Citizen Kane'
             and primaryTitle <> '12 Angry Men' 
             and primaryTitle <> 'The Godfather'     
             and primaryTitle <> 'The Godfather: Part II'
             and primaryTitle <> 'The Godfather: Part III'
-            and primaryTitle <> 'Gone With The Wind'
+            and primaryTitle <> 'Gone With The Wind';
         """
 
-SQL_S3 = """
+SQL_S4 = """
              DELETE FROM basic_titles 
              WHERE startYear is null;
         """
 
-SQL_S4 = """
+SQL_S5 = """
             DELETE FROM ratings
             WHERE numVotes < 5000;
         """
 
-SQL_S5 = """
+SQL_S6 = """
             DELETE FROM ratings
             WHERE averagerating <= 4.0;
         """
 
-SQL_S6 = """
+SQL_S7 = """
             DELETE FROM basic_titles
             WHERE tconst not in (SELECT tconst FROM ratings);
         """
 
-SQL_S7 = """
+SQL_S8 = """
             DELETE FROM ratings
             WHERE tconst not in (SELECT tconst FROM basic_titles);
         """
 
-SQL_S8 = """
+SQL_S9 = """
             DELETE FROM basic_names
             WHERE nconst NOT IN (SELECT nconst FROM principals);
         """
 
-SQL_Sentence = [SQL_S1, SQL_S2, SQL_S3, SQL_S4, SQL_S5, SQL_S6, SQL_S7, SQL_S8]
 
-for i in range(7):
+SQL_Sentence = [SQL_S1, SQL_S2, SQL_S3, SQL_S4, SQL_S5, SQL_S6, SQL_S7, SQL_S8]
+optimizeList = ["basic_titles", "basic_titles", "basic_titles", "basic_titles", "ratings",
+                "ratings", "basic_titles", "ratings"]
+
+for i in range(len(SQL_Sentence)):
     sql_time_start = time.time()
     sql = SQL_Sentence[i]
+    # sql_op = """
+    #         optimize table """ + optimizeList[i] + """;
+    #     """
     print("\n[" + str(i+1) + "번 sql Load]" + sql)
     cursor.execute(SQL_Use)
-    cursor.execute(sql)
+    # cursor.execute(sql_op)
     result = cursor.fetchall()
     connect.commit()
     print("[ " + str(i+1) + "번 sql ]ㅡㅡㅡ #Commit ㅡㅡㅡ")

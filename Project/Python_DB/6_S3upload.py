@@ -9,11 +9,25 @@ from multiprocessing import Pool # Pool import하기
 start_time = time.time()
 print(time.strftime("[%y-%m-%d] %X", time.localtime())) # 현재시간 출력
 
-ACCESS_KEY = 'AKIAX2R4V25UHD5X4DPK'
+ACCESS_KEY = 'AKIAX2R4V25UA7N2724I'
 SECRET_KEY = ''
 
 # 업로드할 폴더 경로
-path_dir = "C:\\Users\\JJunJang\\Desktop\\img\\"
+path_dir = "C:\\Users\\JJunJang\\Desktop\\Dataset\\img_resize\\"
+
+# # 시크릿키를 이 파일말고 따로 불러오자
+# session = boto3.Session(profile_name='name_of_your_profile')
+#
+# def S3session():
+#     s3 = session.resource('s3')
+#     bucket = s3.Bucket('takealookdb')
+#     for obj in bucket.objects.all():
+#        print(obj.key)
+#     return obj.key
+#
+# s3client = session.client('s3')
+# response = s3client.get_object(Bucket='bucketone', key='your key')
+
 
 # s3 파일 업로드 함수
 def upload_to_aws(local_file, bucket, s3_file):
@@ -47,13 +61,9 @@ def fileName():
 
 if __name__=='__main__':
     start_time = time.time()
-    pool = Pool(processes=6) # 6개의 프로세스를 사용합니다.
+    pool = Pool(processes=6)
     pool.map(fileName()) # 실행문/함수 입력
     print("--- Multiprocessing %s seconds ---" % (round(time.time() - start_time, 2)) )
 
 # 업로드 파일 url Example
 # https://takealookdb.s3.ap-northeast-2.amazonaws.com/tt0031381.jpg
-
-
-
-

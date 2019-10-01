@@ -9,7 +9,6 @@
         android:layout_height="90dp"
         android:id="@+id/imageView1"
         android:layout_weight="1"
-        android:background="@drawable/ic_launcher_background"
         android:scaleType="centerInside"/>
 
     <LinearLayout

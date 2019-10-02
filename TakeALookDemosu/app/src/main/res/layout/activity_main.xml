@@ -26,16 +26,6 @@
         android:padding="@dimen/activity_horizontal_margin"
         android:orientation="vertical">
 
-
-        <Button
-            android:id="@+id/btnphp"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="php"
-            android:layout_marginTop="@dimen/btn_margin_top"
-            android:textSize="15dp"
-            android:textColor="#FFFFFF" />
-
         <Button
             android:id="@+id/btnRecommend"
             android:layout_width="fill_parent"

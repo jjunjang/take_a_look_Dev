@@ -112,8 +112,6 @@ if __name__ =='__main__':
     f = open(Loc + "titleKor.tsv", 'w', encoding='utf8')
     f.write("tconst" + "\t" + "titleKor" + "\n")
 
-    rowslist = []
-
     for row in rows:
             f = open(Loc + "titleKor.tsv", 'a', encoding='utf8')
             tconst = row['tconst']

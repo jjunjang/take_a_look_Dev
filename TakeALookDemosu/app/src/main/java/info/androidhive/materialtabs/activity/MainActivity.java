@@ -8,12 +8,11 @@ import android.view.View;
 import android.widget.Button;
 
 import info.androidhive.materialtabs.R;
-import info.androidhive.materialtabs.getphp.Getphp;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Toolbar toolbar;
-    private Button btnphp, btnSimpleTabs, btnRecommend, btnRank, btnOption;
+    private Button btnSimpleTabs, btnRecommend, btnRank, btnOption;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,13 +21,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        btnphp = (Button) findViewById(R.id.btnphp);
         btnSimpleTabs = (Button) findViewById(R.id.btnSimpleTabs);
         btnRecommend = (Button) findViewById(R.id.btnRecommend);
         btnRank = (Button) findViewById(R.id.btnRank);
         btnOption = (Button) findViewById(R.id.btnOption);
 
-        btnphp.setOnClickListener(this);
         btnSimpleTabs.setOnClickListener(this);
         btnRecommend.setOnClickListener(this);
         btnRank.setOnClickListener(this);
@@ -41,10 +38,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         try {
             switch (view.getId()) {
-                case R.id.btnphp:
-                    startActivity(new Intent(MainActivity.this, Getphp.class));
-                    break;
-
                 case R.id.btnSimpleTabs:
                     startActivity(new Intent(MainActivity.this, SimpleTabsActivity.class));
                     break;

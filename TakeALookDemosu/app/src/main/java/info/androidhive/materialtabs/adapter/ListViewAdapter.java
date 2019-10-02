@@ -45,20 +45,20 @@ public class ListViewAdapter extends BaseAdapter {
 
         // 화면에 표시될 View(Layout이 inflate된)으로부터 위젯에 대한 참조 획득
         ImageView iconImageView = (ImageView) convertView.findViewById(R.id.imageView1) ;
-        TextView tconstView = (TextView) convertView.findViewById(R.id.tconst) ;
+//        TextView tconstView = (TextView) convertView.findViewById(R.id.tconst) ;
         TextView titleKorView = (TextView) convertView.findViewById(R.id.titleKor) ;
         TextView averageRatingView = (TextView) convertView.findViewById(R.id.averageRating) ;
-        TextView numVotesView = (TextView) convertView.findViewById(R.id.numVotes) ;
+//        TextView numVotesView = (TextView) convertView.findViewById(R.id.numVotes) ;
 
         // Data Set(listViewItemList)에서 position에 위치한 데이터 참조 획득
         ListViewItem listViewItem = Arraylist.get(position);
 
         // 아이템 내 각 위젯에 데이터 반영0
         iconImageView.setImageDrawable(listViewItem.getMovieImg());
-        tconstView.setText(listViewItem.getTconst());
+//        tconstView.setText(listViewItem.getTconst());
         titleKorView.setText(listViewItem.getTitleKor());
         averageRatingView.setText(listViewItem.getAverageRating());
-        numVotesView.setText(listViewItem.getNumVotes());
+//        numVotesView.setText(listViewItem.getNumVotes());
 
         return convertView;
     }
@@ -76,14 +76,14 @@ public class ListViewAdapter extends BaseAdapter {
     }
 
     // 아이템 데이터 추가를 위한 함수. 개발자가 원하는대로 작성 가능.
-    public void addItem(Drawable movieImg, String tconst, String titleKor, String averageRating, String numVotes) {
+    public void addItem(Drawable movieImg, String titleKor, String averageRating) {
         ListViewItem item = new ListViewItem();
 
         item.setMovieImg(movieImg);
-        item.setTconst(tconst);
+//        item.setTconst(tconst);
         item.setTitleKor(titleKor);
         item.setAverageRating(averageRating);
-        item.setNumVotes(numVotes);
+//        item.setNumVotes(numVotes);
 
         Arraylist.add(item);
     }

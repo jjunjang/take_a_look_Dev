@@ -8,6 +8,7 @@ public class ListViewItem {
     private String titleKor ;
     private String averageRating ;
     private String numVotes ;
+    private String imgUrl;
 
     public Drawable getMovieImg() {
         return movieImg;
@@ -27,6 +28,10 @@ public class ListViewItem {
 
     public String getNumVotes() {
         return numVotes;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
     }
 
     public void setMovieImg(Drawable movieImg) {
@@ -49,12 +54,8 @@ public class ListViewItem {
         this.numVotes = numVotes;
     }
 
-//    public ListViewItem(Drawable movieImg, String tconst, String titleKor,
-//                     String averageRating, String numVotes) {
-//        this.movieImg = movieImg;
-//        this.tconst = tconst;
-//        this.titleKor = titleKor;
-//        this.averageRating = averageRating;
-//        this.numVotes = numVotes;
-//    }
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+
 }

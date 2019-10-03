@@ -1,17 +1,13 @@
 package info.androidhive.materialtabs.fragments;
 
-import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -28,7 +24,7 @@ import info.androidhive.materialtabs.adapter.ListViewAdapter;
 import info.androidhive.materialtabs.item.ListViewItem;
 
 
-public class OneFragment extends ListFragment {
+public class ThreeFragment extends ListFragment {
     String myJSON;
 
     private static final String TAG = "Getphp";
@@ -40,23 +36,14 @@ public class OneFragment extends ListFragment {
     private static final String TAG_numVotes = "numVotes";
     private static final String TAG_imgUrl = "imgUrl";
 
-    ListViewAdapter adapter ;
+    ListViewAdapter adapter = null;
 
     JSONArray peoples = null;
 
     ArrayList<HashMap<String, String>> personList;
 
-    public OneFragment() {
+    public ThreeFragment() {
         // Required empty public constructor
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        adapter = new ListViewAdapter();
-
-        personList = new ArrayList<HashMap<String, String>>();
-        getDbData("http://54.180.103.40/getjson.php");
     }
 
     @Override
@@ -93,7 +80,7 @@ public class OneFragment extends ListFragment {
                         conn.setDefaultUseCaches(false);
 
                         int responseCode = conn.getResponseCode();
-                        System.out.println("GET Response Code : " + responseCode + "==> 200 : oK" );
+                        System.out.println("[Three] GET Response Code : " + responseCode + " ==> 200 : oK" );
                         if(conn.getResponseCode() == HttpURLConnection.HTTP_OK){ // 연결 코드가 리턴되면
                             bufferedReader = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
                             String json;
@@ -139,7 +126,7 @@ public class OneFragment extends ListFragment {
                 //임시 이미지
                 Drawable movieImg = getResources().getDrawable(R.drawable.ic_launcher_background);
 
-                System.out.println("[ONE] imgUrl : " + imgUrl);
+                System.out.println("[Three] imgUrl : " + imgUrl);
 
                 setListAdapter(adapter) ;
 
@@ -150,6 +137,16 @@ public class OneFragment extends ListFragment {
             e.printStackTrace();
         }
         return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        adapter = new ListViewAdapter();
+
+        personList = new ArrayList<HashMap<String, String>>();
+
+        getDbData("http://54.180.103.40/Interest.php");
     }
 
 }

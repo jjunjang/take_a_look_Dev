@@ -1,15 +1,16 @@
 package info.androidhive.materialtabs.fragments;
 
-import android.graphics.Bitmap;
+import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -25,10 +26,11 @@ import java.util.HashMap;
 
 import info.androidhive.materialtabs.R;
 import info.androidhive.materialtabs.adapter.ListViewAdapter;
+import info.androidhive.materialtabs.webcontext.MyAsyncTask;
 import info.androidhive.materialtabs.item.ListViewItem;
 
 
-public class TwoFragment extends ListFragment {
+public class OneFragment extends ListFragment {
     String myJSON;
 
     private static final String TAG = "Getphp";
@@ -40,23 +42,14 @@ public class TwoFragment extends ListFragment {
     private static final String TAG_numVotes = "numVotes";
     private static final String TAG_imgUrl = "imgUrl";
 
-    ListViewAdapter adapter ;
-
+    MyAsyncTask task;
+    ListViewAdapter adapter;
     JSONArray peoples = null;
 
     ArrayList<HashMap<String, String>> personList;
 
-    public TwoFragment() {
+    public OneFragment() {
         // Required empty public constructor
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        adapter = new ListViewAdapter();
-
-        personList = new ArrayList<HashMap<String, String>>();
-        getDbData("http://54.180.103.40/getjson.php");
     }
 
     @Override
@@ -73,13 +66,34 @@ public class TwoFragment extends ListFragment {
         // TODO : use item data.
     }
 
+    //웹에서 데이터를 가져오기 전에 먼저 네트워크 상태부터 확인
+    public void conntectCheck() {
+        ConnectivityManager connMgr = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        if (networkInfo != null && networkInfo.isConnected()) {
+            // fetch data
+            //Toast.makeText(this,"네트워크 연결중입니다.", Toast.LENGTH_SHORT).show();
+            task = new MyAsyncTask(this);
+            task.execute("");
+
+        } else {
+            // display error
+            Toast.makeText(this,"네트워크 상태를 확인하십시오", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void onClick(View v) {
+        conntectCheck();
+    }
+
     private void getDbData(String string) {
         class GetDataJSON extends AsyncTask<String, Void, String> {
 
             @Override
-            protected String doInBackground(String... params) {
-                String uri = params[0];
-                BufferedReader bufferedReader = null;
+                protected String doInBackground(String... params) {
+                    String uri = params[0];
+                    BufferedReader bufferedReader = null;
 
                 try {
                     URL url = new URL(uri);
@@ -93,7 +107,7 @@ public class TwoFragment extends ListFragment {
                         conn.setDefaultUseCaches(false);
 
                         int responseCode = conn.getResponseCode();
-                        System.out.println("GET Response Code : " + responseCode + "==> 200 : oK" );
+                        System.out.println("[ONE] GET Response Code : " + responseCode + " ==> 200 : oK" );
                         if(conn.getResponseCode() == HttpURLConnection.HTTP_OK){ // 연결 코드가 리턴되면
                             bufferedReader = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
                             String json;
@@ -109,7 +123,6 @@ public class TwoFragment extends ListFragment {
                     return new String("Exception: " + e.getMessage());
                 }
             }
-
             protected void onPostExecute(String result){
                 myJSON=result;
             }
@@ -152,4 +165,13 @@ public class TwoFragment extends ListFragment {
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        adapter = new ListViewAdapter();
+        personList = new ArrayList<HashMap<String, String>>();
+        setListAdapter(adapter);
+
+        getDbData("http://54.180.103.40/Like.php");
+    }
 }

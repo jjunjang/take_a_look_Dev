@@ -1,0 +1,18 @@
+BEGIN TRANSACTION;
+INSERT INTO "basic_titles" VALUES ('tt6146586','존 윅 3 파라벨룸','액션,범죄,스릴러',2019,131);
+INSERT INTO "basic_titles" VALUES ('tt4575328','마션 인베이션','액션,SF,스릴러',2018,94);
+INSERT INTO "basic_titles" VALUES ('tt1727824','보헤미안 랩소디','일대기,드라마,음악',2018,134);
+INSERT INTO "basic_titles" VALUES ('tt6751668','기생충','코미디,드라마,스릴러',2019,132);
+INSERT INTO "basic_titles" VALUES ('tt5095030','앤트맨과 와스프','액션,어드벤처,코미디',2018,118);
+INSERT INTO "basic_titles" VALUES ('tt7238392','택시 5','액션,어드벤처,코미디',2018,102);
+INSERT INTO "basic_titles" VALUES ('tt1241317','데스 노트','어드벤처,범죄,드라마',2017,101);
+INSERT INTO "basic_titles" VALUES ('tt1431045','데드풀 2','액션,어드벤처,코미디',2016,108);
+INSERT INTO "basic_titles" VALUES ('tt3065204','컨저링 2','호러,미스터리,스릴러',2016,134);
+INSERT INTO "basic_titles" VALUES ('tt1478338','내 여자친구의 결혼식','코미디,로맨스',2011,125);
+INSERT INTO "basic_titles" VALUES ('tt1132626','쏘우 5','호러,미스테리,스릴러',2008,92);
+INSERT INTO "basic_titles" VALUES ('tt0498353','호스텔 2','호러',2007,94);
+INSERT INTO "basic_titles" VALUES ('tt1179904','파라노말 액티비티 더 고스트 디멘션','호러,미스테리,스릴러',2007,86);
+INSERT INTO "basic_titles" VALUES ('tt0298148','슈렉 2','어드벤처,애니메이션,코미디',2004,93);
+INSERT INTO "basic_titles" VALUES ('tt0373074','쿵푸 허슬 2','액션,코미디,판타지',2004,99);
+INSERT INTO "basic_titles" VALUES ('tt0163025','쥬라기 공원 3','액션,어드벤처,SF',2001,92);
+COMMIT;

@@ -89,6 +89,7 @@ public class RecommendActivity extends AppCompatActivity {
             builder.setPositiveButton("Like", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
+//                    insertColumn();
                     Toast.makeText(getApplicationContext(),"List에 추가 되었습니다",Toast.LENGTH_LONG).show();
                 }
             }).setNegativeButton("Hate", new DialogInterface.OnClickListener() {

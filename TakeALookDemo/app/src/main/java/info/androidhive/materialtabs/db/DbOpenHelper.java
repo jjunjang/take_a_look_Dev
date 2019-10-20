@@ -7,10 +7,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
-import android.widget.Toast;
 
-import info.androidhive.materialtabs.activity.RecommendActivity;
 
 public class DbOpenHelper {
 
@@ -21,6 +18,8 @@ public class DbOpenHelper {
     private Context mCtx;
 
     public static final String SQL_RECOMMEND_TCONST = "SELECT tconst FROM basic_titles ORDER BY random() LIMIT 4;";
+    public static final String SQL_LIST_USERTCONST = "SELECT tconst FROM mylist ;";
+    public static final String SQL_LIST_USERTITLEKOR = "SELECT titleKor FROM mylist ;";
 
     private class DatabaseHelper extends SQLiteOpenHelper{
 
@@ -106,7 +105,7 @@ public class DbOpenHelper {
 
     // Select DB = mylist 테이블 전체
     public Cursor selectColumns(){
-        return mDB.query(DataBases.CreateDB._TABLENAME0, null, null, null, null, null, null);
+        return mDB.query(DataBases.CreateDB._TABLENAME1, null, null, null, null, null, null);
     }
 
     // Select DB = basic_titles Recommend imageView tconst output

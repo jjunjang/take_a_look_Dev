@@ -56,7 +56,7 @@ public class TwoFragment extends ListFragment {
         adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.tt0306047),
                 "무서운영화3", "평점 : 5.5") ;
 
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.tt6139732	),
+        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.tt6139732),
                 "알라딘", "평점 : 7.5") ;
 
         adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.tt2097307),

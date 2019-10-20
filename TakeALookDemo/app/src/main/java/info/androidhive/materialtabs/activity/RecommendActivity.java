@@ -20,16 +20,14 @@ import android.widget.Toast;
 import info.androidhive.materialtabs.R;
 import info.androidhive.materialtabs.db.DbOpenHelper;
 
+
 public class RecommendActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private DbOpenHelper mDbOpenHelper;
     private static String String_tconst;
     private static int Integer_tconst;
+    private static String[] SetDialogRecommend = new String[4];
     private static int[] SetImageRecommend = new int[4];
-    private static int count = 0;
-
-
-
 
     SwipeRefreshLayout layout;
 
@@ -53,11 +51,12 @@ public class RecommendActivity extends AppCompatActivity {
 
         // 중복제거
         for (int i=0; i<4; i++) {
-            SetImageRecommend[i] = SELECT_TCONST(); // 일단 4번돌림
+            Integer_tconst = getResources().getIdentifier(SELECT_TCONST(), "drawable", getPackageName());
+            SetImageRecommend[i] = Integer_tconst;
             for (int j=0; j<i; j++) {
+
                 if (SetImageRecommend[i] == SetImageRecommend[j]) {
-                    SetImageRecommend[j] = SELECT_TCONST(); // J번째에서 중복이므로 다시 돌려서 넣음
-                    i--;
+                    i--; // J번째에서 중복이므로 다시 돌려서 넣음
                 }
             }
         }
@@ -70,6 +69,7 @@ public class RecommendActivity extends AppCompatActivity {
 
         mDbOpenHelper.close();
 
+        // 새로고침
         layout = (SwipeRefreshLayout) findViewById(R.id.layout);
         layout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -77,14 +77,17 @@ public class RecommendActivity extends AppCompatActivity {
 
                 // 중복제거
                 for (int i=0; i<4; i++) {
-                    SetImageRecommend[i] = SELECT_TCONST(); // 일단 4번돌림
+                    Integer_tconst = getResources().getIdentifier(SELECT_TCONST(), "drawable", getPackageName());
+                    SetDialogRecommend[i] = SELECT_TCONST(); // 다이얼로그에 재활용
+                    SetImageRecommend[i] = Integer_tconst;
                     for (int j=0; j<i; j++) {
+
                         if (SetImageRecommend[i] == SetImageRecommend[j]) {
-                            SetImageRecommend[j] = SELECT_TCONST(); // J번째에서 중복이므로 다시 돌려서 넣음
-                            i--;
+                            i--; // J번째에서 중복이므로 다시 돌려서 넣음
                         }
                     }
                 }
+
                 //새로고침 작업 실행...
                 reimg1.setImageResource( SetImageRecommend[0] );
                 reimg2.setImageResource( SetImageRecommend[1] );
@@ -123,139 +126,141 @@ public class RecommendActivity extends AppCompatActivity {
         });
     }
 
-    private int SELECT_TCONST() {
+    private String SELECT_TCONST() {
         mDbOpenHelper.READ();
         Cursor cursor = mDbOpenHelper.mDB.rawQuery(mDbOpenHelper.SQL_RECOMMEND_TCONST,null);
 
         if(cursor.moveToFirst()) {
             String_tconst = cursor.getString(0);
-            Integer_tconst = getResources().getIdentifier(String_tconst, "drawable", getPackageName());
-            Toast.makeText(this, String_tconst, Toast.LENGTH_LONG).show();
+//            Toast.makeText(this, String_tconst, Toast.LENGTH_LONG).show();
         }
         cursor.close();
-        return Integer_tconst;
+        return String_tconst;
     }
 
 
-        void ClickImg1() {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setPositiveButton("Like", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    Toast.makeText(getApplicationContext(),"List에 추가 되었습니다",Toast.LENGTH_LONG).show();
-                }
-            }).setNegativeButton("Hate", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    Toast.makeText(getApplicationContext(),"List에 추가 되었습니다",Toast.LENGTH_LONG).show();
-                }
-            }).setNeutralButton("Interest", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    Toast.makeText(getApplicationContext(), "List에 추가 되었습니다", Toast.LENGTH_LONG).show();
-                    }
-                });
+    void ClickImg1() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setPositiveButton("Like", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getApplicationContext(),"List에 추가 되었습니다",Toast.LENGTH_LONG).show();
+            }
+        }).setNegativeButton("Hate", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getApplicationContext(),"List에 추가 되었습니다",Toast.LENGTH_LONG).show();
+            }
+        }).setNeutralButton("Interest", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getApplicationContext(), "List에 추가 되었습니다", Toast.LENGTH_LONG).show();
+            }
+        });
 
+        final AlertDialog dialog = builder.create();
 
-            final AlertDialog dialog = builder.create();
-            LayoutInflater inflater = getLayoutInflater();
-            View dialogLayout = inflater.inflate(R.layout.fragment_one, null);
+        ImageView showImage = new ImageView(this);
+        showImage.setImageResource( SetImageRecommend[0] );
+        dialog.setView(showImage);
 
-            dialog.setView(dialogLayout);
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-            dialog.show();
+        dialog.show();
 
-        }
+    }
 
-        void ClickImg2() {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setPositiveButton("Like", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    Toast.makeText(getApplicationContext(),"List에 추가 되었습니다",Toast.LENGTH_LONG).show();
-                }
-            }).setNegativeButton("Hate", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    Toast.makeText(getApplicationContext(),"List에 추가 되었습니다",Toast.LENGTH_LONG).show();
-                }
-            }).setNeutralButton("Interest", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    Toast.makeText(getApplicationContext(), "List에 추가 되었습니다", Toast.LENGTH_LONG).show();
-                }
-            });
+    void ClickImg2() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setPositiveButton("Like", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getApplicationContext(),"List에 추가 되었습니다",Toast.LENGTH_LONG).show();
+            }
+        }).setNegativeButton("Hate", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getApplicationContext(),"List에 추가 되었습니다",Toast.LENGTH_LONG).show();
+            }
+        }).setNeutralButton("Interest", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getApplicationContext(), "List에 추가 되었습니다", Toast.LENGTH_LONG).show();
+            }
+        });
 
-            final AlertDialog dialog = builder.create();
-            LayoutInflater inflater = getLayoutInflater();
-            View dialogLayout = inflater.inflate(R.layout.fragment_two, null);
+        final AlertDialog dialog = builder.create();
 
-            dialog.setView(dialogLayout);
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        ImageView showImage = new ImageView(this);
+        showImage.setImageResource( SetImageRecommend[1] );
+        dialog.setView(showImage);
 
-            dialog.show();
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-        }
+        dialog.show();
 
-        void ClickImg3() {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setPositiveButton("Like", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    Toast.makeText(getApplicationContext(),"List에 추가 되었습니다",Toast.LENGTH_LONG).show();
-                }
-            }).setNegativeButton("Hate", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    Toast.makeText(getApplicationContext(),"List에 추가 되었습니다",Toast.LENGTH_LONG).show();
-                }
-            }).setNeutralButton("Interest", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    Toast.makeText(getApplicationContext(), "List에 추가 되었습니다", Toast.LENGTH_LONG).show();
-                }
-            });
+    }
 
-            final AlertDialog dialog = builder.create();
-            LayoutInflater inflater = getLayoutInflater();
-            View dialogLayout = inflater.inflate(R.layout.fragment_three, null);
+    void ClickImg3() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setPositiveButton("Like", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getApplicationContext(),"List에 추가 되었습니다",Toast.LENGTH_LONG).show();
+            }
+        }).setNegativeButton("Hate", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getApplicationContext(),"List에 추가 되었습니다",Toast.LENGTH_LONG).show();
+            }
+        }).setNeutralButton("Interest", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getApplicationContext(), "List에 추가 되었습니다", Toast.LENGTH_LONG).show();
+            }
+        });
 
-            dialog.setView(dialogLayout);
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        final AlertDialog dialog = builder.create();
 
-            dialog.show();
+        ImageView showImage = new ImageView(this);
+        showImage.setImageResource( SetImageRecommend[2] );
+        dialog.setView(showImage);
 
-        }
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-        void ClickImg4() {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setPositiveButton("Like", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    Toast.makeText(getApplicationContext(),"List에 추가 되었습니다",Toast.LENGTH_LONG).show();
-                }
-            }).setNegativeButton("Hate", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    Toast.makeText(getApplicationContext(),"List에 추가 되었습니다",Toast.LENGTH_LONG).show();
-                }
-            }).setNeutralButton("Interest", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    Toast.makeText(getApplicationContext(), "List에 추가 되었습니다", Toast.LENGTH_LONG).show();
-                }
-            });
+        dialog.show();
 
-            final AlertDialog dialog = builder.create();
-            LayoutInflater inflater = getLayoutInflater();
-            View dialogLayout = inflater.inflate(R.layout.fragment_four, null);
+    }
 
-            dialog.setView(dialogLayout);
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+    void ClickImg4() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setPositiveButton("Like", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getApplicationContext(),"List에 추가 되었습니다",Toast.LENGTH_LONG).show();
+            }
+        }).setNegativeButton("Hate", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getApplicationContext(),"List에 추가 되었습니다",Toast.LENGTH_LONG).show();
+            }
+        }).setNeutralButton("Interest", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getApplicationContext(), "List에 추가 되었습니다", Toast.LENGTH_LONG).show();
+            }
+        });
 
-            dialog.show();
+        final AlertDialog dialog = builder.create();
 
-        }
+        ImageView showImage = new ImageView(this);
+        showImage.setImageResource( SetImageRecommend[3] );
+        dialog.setView(showImage);
+
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+        dialog.show();
+
+    }
 
 }

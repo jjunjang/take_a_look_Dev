@@ -7,6 +7,10 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+import android.widget.Toast;
+
+import info.androidhive.materialtabs.activity.RecommendActivity;
 
 public class DbOpenHelper {
 
@@ -16,8 +20,9 @@ public class DbOpenHelper {
     private DatabaseHelper mDBHelper;
     private Context mCtx;
 
-    private class DatabaseHelper extends SQLiteOpenHelper{
+    public static final String SQL_RECOMMEND_TCONST = "SELECT tconst FROM basic_titles ORDER BY random() LIMIT 4;";
 
+    private class DatabaseHelper extends SQLiteOpenHelper{
 
         public DatabaseHelper(Context context, String name, CursorFactory factory, int version) {
             super(context, name, factory, version);
@@ -33,7 +38,6 @@ public class DbOpenHelper {
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             db.execSQL("DROP TABLE IF EXISTS "+DataBases.CreateDB._TABLENAME0);
-            db.execSQL("DROP TABLE IF EXISTS "+DataBases.CreateDB._TABLENAME1);
             onCreate(db);
         }
     }
@@ -45,6 +49,12 @@ public class DbOpenHelper {
     public DbOpenHelper open() throws SQLException{
         mDBHelper = new DatabaseHelper(mCtx, DATABASE_NAME, null, DATABASE_VERSION);
         mDB = mDBHelper.getWritableDatabase();
+        return this;
+    }
+
+    public DbOpenHelper READ() throws SQLException{
+        mDBHelper = new DatabaseHelper(mCtx, DATABASE_NAME, null, DATABASE_VERSION);
+        mDB = mDBHelper.getReadableDatabase();
         return this;
     }
 
@@ -86,7 +96,7 @@ public class DbOpenHelper {
 
     // mylist 초기화 # TABLENAME0 = basic_titles, TABLENAME1 = mylist
     public void deleteAllColumns() {
-        mDB.delete(DataBases.CreateDB._TABLENAME1, null, null);
+        mDB.delete(DataBases.CreateDB._TABLENAME0, null, null);
     }
 
     // Delete DB
@@ -94,9 +104,16 @@ public class DbOpenHelper {
         return mDB.delete(DataBases.CreateDB._TABLENAME0, "_id="+id, null) > 0;
     }
 
-    // Select DB = mylist 테이블 데이터
+    // Select DB = mylist 테이블 전체
     public Cursor selectColumns(){
-        return mDB.query(DataBases.CreateDB._TABLENAME1, null, null, null, null, null, null);
+        return mDB.query(DataBases.CreateDB._TABLENAME0, null, null, null, null, null, null);
+    }
+
+    // Select DB = basic_titles Recommend imageView tconst output
+    public Cursor selectRecommend(){
+        String sql = "SELECT tconst FROM basic_titles ORDER BY random() LIMIT 1;";
+
+        return mDB.rawQuery(sql, null);
     }
 
 }

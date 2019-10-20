@@ -6,6 +6,7 @@ import android.provider.BaseColumns;
 public final class DataBases {
 
     public static final class CreateDB implements BaseColumns{
+        public static final String _ID = "id";
         public static final String TCONST = "tconst";
         public static final String TITLEKOR = "titleKor";
         public static final String GENRES = "genres";
@@ -19,8 +20,10 @@ public final class DataBases {
         public static final String LISTTYPE = "listType";
 
         public static final String _TABLENAME0 = "basic_titles";
-        public static final String _CREATE0 = "create table if not exists "+_TABLENAME0+"("
-                +_ID+" INTEGER primary key autoincrement, "
+        public static final String _TABLENAME1 = "mylist";
+
+        public static final String _CREATE0 = "CREATE TABLE IF NOT EXISTS "+_TABLENAME0+" ("
+                +_ID+" INTEGER PRIMARY KEY AUTOINCREMENT, "
                 +TCONST+" VARCHAR(10) not null , "
                 +TITLEKOR+" VARCHAR(415) not null , "
                 +GENRES+" VARCHAR(50) not null , "
@@ -29,13 +32,12 @@ public final class DataBases {
                 +EMONAME+" VARCHAR(50) not null , "
                 +EMOSCORE+" FLOAT not null , "
                 +STARTYEAR+" INTEGER not null ,"
-                +RUNTIMEMIN+" INTEGER not null , \");";
+                +RUNTIMEMIN+" INTEGER not null );";
 
-        public static final String _TABLENAME1 = "mylist";
-        public static final String _CREATE1 = "create table if not exists "+_TABLENAME1+"("
+        public static final String _CREATE1 = "CREATE TABLE IF NOT EXISTS "+_TABLENAME1+" ("
                 +_ID+" INTEGER primary key autoincrement, "
                 +TCONST+" VARCHAR(10) not null , "
                 +TITLEKOR+" VARCHAR(415) not null , "
-                +LISTTYPE+" VARCHAR(8) not null , \");";
+                +LISTTYPE+" VARCHAR(8) not null );";
     }
 }

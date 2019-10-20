@@ -15,4 +15,10 @@ INSERT INTO "basic_titles" VALUES (13,'tt1179904','파라노말 액티비티 더
 INSERT INTO "basic_titles" VALUES (14,'tt0298148','슈렉 2','어드벤처,애니메이션,코미디',7.2,388615,'코미디',80.75,2004,93);
 INSERT INTO "basic_titles" VALUES (15,'tt0373074','쿵푸 허슬 2','액션,코미디,판타지',7.7,118384,'코미디',95.85,2004,99);
 INSERT INTO "basic_titles" VALUES (16,'tt0163025','쥬라기 공원 3','액션,어드벤처,SF',5.9,278366,'액션',30.1,2001,92);
+INSERT INTO "mylist" VALUES (1,'tt6146586','존 윅 3 파라벨룸','Like');
+INSERT INTO "mylist" VALUES (2,'tt1727824','보헤미안 랩소디','Interest');
+INSERT INTO "mylist" VALUES (3,'tt1478338','내 여자친구의 결혼식','Like');
+INSERT INTO "mylist" VALUES (4,'tt1132626','쏘우 5','Hate');
+INSERT INTO "mylist" VALUES (5,'tt0498353','호스텔 2','Hate');
+INSERT INTO "mylist" VALUES (6,'tt0163025','쥬라기 공원 3','Interest');
 COMMIT;

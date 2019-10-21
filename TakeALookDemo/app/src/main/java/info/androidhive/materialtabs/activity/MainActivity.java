@@ -12,7 +12,8 @@ import info.androidhive.materialtabs.R;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Toolbar toolbar;
-    private Button btnSimpleTabs, btnRecommend, btnRank, btnOption;
+    private Button btnSimpleTabs, btnRank, btnOption, btnRecommend;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,18 +38,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnSimpleTabs:
+                btnSimpleTabs.setBackgroundResource(R.drawable.btn_states);
                 startActivity(new Intent(MainActivity.this, SimpleTabsActivity.class));
                 break;
 
             case R.id.btnRecommend:
+                btnRecommend.setBackgroundResource(R.drawable.btn_states);
                 startActivity(new Intent(MainActivity.this, RecommendActivity.class));
                 break;
 
             case R.id.btnRank:
+                btnRank.setBackgroundResource(R.drawable.btn_states);
                 startActivity(new Intent(MainActivity.this, RankActivity.class));
                 break;
 
             case R.id.btnOption:
+                btnOption.setBackgroundResource(R.drawable.btn_states);
                 startActivity(new Intent(MainActivity.this, OptionActivity.class));
                 break;
         }

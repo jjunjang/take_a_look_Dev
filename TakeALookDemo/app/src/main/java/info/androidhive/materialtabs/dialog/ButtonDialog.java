@@ -19,14 +19,14 @@ public class ButtonDialog extends AppCompatActivity {
         Button btnReset = (Button) findViewById(R.id.btnReset);
         Button btnLogout = (Button) findViewById(R.id.btnLogout);
 
-        btnLogout.setOnClickListener(new View.OnClickListener() {
+        btnReset.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
                 Dialog();
             }
         });
 
-        btnReset.setOnClickListener(new View.OnClickListener() {
+        btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Dialog();
@@ -54,4 +54,5 @@ public class ButtonDialog extends AppCompatActivity {
 
         builder.show();
     }
+
 }

@@ -7,10 +7,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
-import android.widget.Toast;
 
-import info.androidhive.materialtabs.activity.RecommendActivity;
 
 public class DbOpenHelper {
 
@@ -20,7 +17,19 @@ public class DbOpenHelper {
     private DatabaseHelper mDBHelper;
     private Context mCtx;
 
-    public static final String SQL_RECOMMEND_TCONST = "SELECT tconst FROM basic_titles ORDER BY random() LIMIT 4;";
+    public static final String SQL_RECOMMEND_TCONST = "SELECT tconst FROM basic_titles WHERE tconst NOT IN (SELECT tconst FROM listLike UNION SELECT tconst from listHate UNION SELECT tconst from listInterest) ORDER BY random() LIMIT 4;";
+
+    public static final String SQL_LIST_LIKE_TCONST = "SELECT tconst FROM listLike ;";
+    public static final String SQL_LIST_LIKE_TITLEKOR = "SELECT titleKor FROM listLike ;";
+    public static final String SQL_LIST_LIKE_RATINGS = "SELECT averRatings FROM listLike ;";
+    public static final String SQL_LIST_HATE_TCONST = "SELECT tconst FROM listHate ;";
+    public static final String SQL_LIST_HATE_TITLEKOR = "SELECT titleKor FROM listHate ;";
+    public static final String SQL_LIST_HATE_RATINGS = "SELECT averRatings FROM listHate ;";
+    public static final String SQL_LIST_INTEREST_TCONST = "SELECT tconst FROM listInterest ;";
+    public static final String SQL_LIST_INTEREST_TITLEKOR = "SELECT titleKor FROM listInterest ;";
+    public static final String SQL_LIST_INTEREST_RATINGS = "SELECT averRatings FROM listInterest ;";
+
+
 
     private class DatabaseHelper extends SQLiteOpenHelper{
 
@@ -66,22 +75,36 @@ public class DbOpenHelper {
         mDB.close();
     }
 
-    // Insert DB
-    public long insertColumn(String tconst, String genres, String averRatings, String numVotes, String titleKor, String emoName , String empScore, String startYear){
+    // insert DB
+    public long insertlistLike(int id, String tconst, String titleKor, String averRatings){
         ContentValues values = new ContentValues();
+        values.put(DataBases.CreateDB._ID, id);
         values.put(DataBases.CreateDB.TCONST, tconst);
         values.put(DataBases.CreateDB.TITLEKOR, titleKor);
-        values.put(DataBases.CreateDB.GENRES, genres);
         values.put(DataBases.CreateDB.AVERRATINGS, averRatings);
-        values.put(DataBases.CreateDB.NUMVOTES, numVotes);
-        values.put(DataBases.CreateDB.EMONAME, emoName);
-        values.put(DataBases.CreateDB.EMOSCORE, empScore);
-        values.put(DataBases.CreateDB.STARTYEAR, startYear);
-        return mDB.insert(DataBases.CreateDB._TABLENAME0, null, values);
+        return mDB.insert(DataBases.CreateDB._TABLENAME1, null, values);
+    }
+
+    public long insertlistHate(int id, String tconst, String titleKor, String averRatings){
+        ContentValues values = new ContentValues();
+        values.put(DataBases.CreateDB._ID, id);
+        values.put(DataBases.CreateDB.TCONST, tconst);
+        values.put(DataBases.CreateDB.TITLEKOR, titleKor);
+        values.put(DataBases.CreateDB.AVERRATINGS, averRatings);
+        return mDB.insert(DataBases.CreateDB._TABLENAME2, null, values);
+    }
+
+    public long insertlistInterest(int id, String tconst, String titleKor, String averRatings){
+        ContentValues values = new ContentValues();
+        values.put(DataBases.CreateDB._ID, id);
+        values.put(DataBases.CreateDB.TCONST, tconst);
+        values.put(DataBases.CreateDB.TITLEKOR, titleKor);
+        values.put(DataBases.CreateDB.AVERRATINGS, averRatings);
+        return mDB.insert(DataBases.CreateDB._TABLENAME3, null, values);
     }
 
     // Update DB
-    public boolean updateColumn(long id, String tconst, String genres, String averRatings, String numVotes, String titleKor, String emoName , String empScore, String startYear){
+    public boolean updateColumn(int id, String tconst, String genres, String averRatings, String numVotes, String titleKor, String emoName , String empScore, String startYear){
         ContentValues values = new ContentValues();
         values.put(DataBases.CreateDB.TCONST, tconst);
         values.put(DataBases.CreateDB.TITLEKOR, titleKor);
@@ -94,9 +117,17 @@ public class DbOpenHelper {
         return mDB.update(DataBases.CreateDB._TABLENAME0, values, "_id=" + id, null) > 0;
     }
 
-    // mylist 초기화 # TABLENAME0 = basic_titles, TABLENAME1 = mylist
-    public void deleteAllColumns() {
-        mDB.delete(DataBases.CreateDB._TABLENAME0, null, null);
+    // mylist 초기화 # TABLENAME0 = basic_titles, TABLENAME1 = listLike, TABLENAME2 = listHate, TABLENAME3 = listInterest,
+    public void resetLike() {
+        mDB.delete(DataBases.CreateDB._TABLENAME1, null, null);
+    }
+
+    public void resetHate() {
+        mDB.delete(DataBases.CreateDB._TABLENAME2, null, null);
+    }
+
+    public void resetInterest() {
+        mDB.delete(DataBases.CreateDB._TABLENAME3, null, null);
     }
 
     // Delete DB
@@ -106,14 +137,22 @@ public class DbOpenHelper {
 
     // Select DB = mylist 테이블 전체
     public Cursor selectColumns(){
-        return mDB.query(DataBases.CreateDB._TABLENAME0, null, null, null, null, null, null);
+        return mDB.query(DataBases.CreateDB._TABLENAME1, null, null, null, null, null, null);
     }
 
-    // Select DB = basic_titles Recommend imageView tconst output
-    public Cursor selectRecommend(){
-        String sql = "SELECT tconst FROM basic_titles ORDER BY random() LIMIT 1;";
+    public void selectBasictitles(){
+        mDB.query(DataBases.CreateDB._TABLENAME0, null, null, null, null, null, null);
+    }
 
-        return mDB.rawQuery(sql, null);
+    // Delete Column FROM listLike, listHate, listInterest
+    public void deleteColumnLike(String _titleKor) {
+        mDB.delete(DataBases.CreateDB._TABLENAME1, "titleKor="+_titleKor, null);
+    }
+    public void deleteColumnHate(String _titleKor) {
+        mDB.delete(DataBases.CreateDB._TABLENAME2, "titleKor="+_titleKor, null);
+    }
+    public void deleteColumnInterest(String _titleKor) {
+        mDB.delete(DataBases.CreateDB._TABLENAME3, "titleKor="+_titleKor, null);
     }
 
 }

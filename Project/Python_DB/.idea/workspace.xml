@@ -2,8 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="af561538-be94-4c65-bf47-85ced663e398" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sqliteDB/takealookDB.db" beforeDir="false" afterPath="$PROJECT_DIR$/../sqliteDB/takealookDB.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../TakeALookDemo/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/../../TakeALookDemo/.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../TakeALookDemo/.idea/caches/gradle_models.ser" beforeDir="false" afterPath="$PROJECT_DIR$/../../TakeALookDemo/.idea/caches/gradle_models.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../TakeALookDemo/app/src/main/java/info/androidhive/materialtabs/activity/OptionActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../TakeALookDemo/app/src/main/java/info/androidhive/materialtabs/activity/OptionActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../TakeALookDemo/app/src/main/java/info/androidhive/materialtabs/activity/RecommendActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../TakeALookDemo/app/src/main/java/info/androidhive/materialtabs/activity/RecommendActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../TakeALookDemo/app/src/main/java/info/androidhive/materialtabs/db/DataBases.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../TakeALookDemo/app/src/main/java/info/androidhive/materialtabs/db/DataBases.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../TakeALookDemo/app/src/main/java/info/androidhive/materialtabs/db/DbOpenHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../TakeALookDemo/app/src/main/java/info/androidhive/materialtabs/db/DbOpenHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../TakeALookDemo/app/src/main/java/info/androidhive/materialtabs/dialog/ButtonDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../TakeALookDemo/app/src/main/java/info/androidhive/materialtabs/dialog/ButtonDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../TakeALookDemo/app/src/main/java/info/androidhive/materialtabs/fragments/OneFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../TakeALookDemo/app/src/main/java/info/androidhive/materialtabs/fragments/OneFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../TakeALookDemo/app/src/main/java/info/androidhive/materialtabs/fragments/ThreeFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../TakeALookDemo/app/src/main/java/info/androidhive/materialtabs/fragments/ThreeFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../TakeALookDemo/app/src/main/java/info/androidhive/materialtabs/fragments/TwoFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../TakeALookDemo/app/src/main/java/info/androidhive/materialtabs/fragments/TwoFragment.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -79,8 +89,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/imgasd.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="18" column="59" selection-start-line="18" selection-start-column="59" selection-end-line="18" selection-end-column="59" />
+            <state relative-caret-position="266">
+              <caret line="14" selection-start-line="14" selection-end-line="14" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
@@ -590,8 +600,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/imgasd.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="18" column="59" selection-start-line="18" selection-start-column="59" selection-end-line="18" selection-end-column="59" />
+        <state relative-caret-position="266">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
           </folding>

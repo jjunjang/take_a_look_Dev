@@ -35,7 +35,8 @@
             android:text="@string/btn_scrollable_tabs"
             android:layout_marginTop="@dimen/btn_margin_top"
             android:textSize="15dp"
-            android:textColor="#FFFFFF" />
+            android:textColor="#FFFFFF"
+            android:background="@drawable/btn_nomal"/>
 
 
         <Button
@@ -45,7 +46,8 @@
             android:text="@string/btn_simple_tabs"
             android:layout_marginTop="@dimen/btn_margin_top"
             android:textSize="15dp"
-            android:textColor="#FFFFFF"/>
+            android:textColor="#FFFFFF"
+            android:background="@drawable/btn_nomal"/>
 
         <Button
             android:id="@+id/btnRank"
@@ -54,7 +56,8 @@
             android:text="@string/btn_icon_text_tabs"
             android:layout_marginTop="@dimen/btn_margin_top"
             android:textSize="15dp"
-            android:textColor="#FFFFFF"/>
+            android:textColor="#FFFFFF"
+            android:background="@drawable/btn_nomal"/>
 
         <Button
             android:id="@+id/btnOption"
@@ -63,7 +66,8 @@
             android:text="@string/btn_icon_tabs"
             android:layout_marginTop="@dimen/btn_margin_top"
             android:textSize="15dp"
-            android:textColor="#FFFFFF"/>
+            android:textColor="#FFFFFF"
+            android:background="@drawable/btn_nomal"/>
 
     </LinearLayout>
 
